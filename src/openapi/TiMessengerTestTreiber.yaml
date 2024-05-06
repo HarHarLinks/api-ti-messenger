@@ -1748,11 +1748,40 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "information about the client authorization mode"
+          description: "Information about the client authorization mode"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthorizationMode"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+      - TI-M_Pro
+      - TI-M_ePA
+      - authorizationManagement
+      description: ""
+      operationId: setAuthorizationMode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationMode"
+      responses:
+        "200":
+          description: "client authorization mode was set"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationMode"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
   /devices/{deviceId}/alloweddUsers:
     parameters:
@@ -1764,7 +1793,7 @@ paths:
         - TI-M_ePA
         - authorizationManagement
       description: ""
-      operationId: getAlloweddUserList
+      operationId: getAlloweddUsersList
       parameters: []
       responses:
         "200":
@@ -1773,6 +1802,123 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthorizationList"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: postAlloweddUsersList
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationList"
+      responses:
+        "200":
+          description: "Add allowed users or domains"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: deleteAlloweddUsersList
+      responses:
+        "204":
+          description: "AlloweddUsersList Deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+  /devices/{deviceId}/blockedUsers:
+    parameters:
+      - $ref: "#/components/parameters/deviceId"
+      - $ref: "#/components/parameters/transactionIdHeader"
+      - $ref: "#/components/parameters/mxidInPath"
+    get:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: getBlockedUsersList
+      parameters: []
+      responses:
+        "200":
+          description: "list of blocked users or domains"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationList"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    post:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: postBlockedUsersList
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationList"
+      responses:
+        "200":
+          description: "list of blocked users or domains"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: deleteBlockedUsersList
+      responses:
+        "204":
+          description: "BlockedUsersList deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
   /devices/{deviceId}/alloweddUser/{mxid}:
     parameters:
@@ -1789,7 +1935,33 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "OK"
+          description: "Allowed user mxid added"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MxId"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: deleteAlloweddUserMxid
+      parameters: []
+      responses:
+        "204":
+          description: "Allowed user mxid deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
   /devices/{deviceId}/alloweddUser/{domain}:
     parameters:
@@ -1803,27 +1975,37 @@ paths:
         - authorizationManagement
       description: ""
       operationId: getAlloweddUserDomain
-      parameters: [ ]
+      parameters: []
       responses:
         "200":
-          description: "OK"
+          description: "Allowed user domain added"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Domain"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
-  /devices/{deviceId}/blockedUsers:
-    parameters:
-      - $ref: "#/components/parameters/deviceId"
-      - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/mxidInPath"
-    get:
+    delete:
       tags:
         - TI-M_Pro
         - TI-M_ePA
         - authorizationManagement
       description: ""
-      operationId: getBlockedUserList
+      operationId: deleteAlloweddUserDomain
       parameters: []
       responses:
-        "200":
-          description: "OK"
+        "204":
+          description: "Allowed user domain deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
 
   /devices/{deviceId}/blockedUser/{mxid}:
     parameters:
@@ -1836,11 +2018,37 @@ paths:
         - TI-M_ePA
         - authorizationManagement
       description: ""
-      operationId: getblockedUser
+      operationId: getblockedUserMxid
       parameters: []
       responses:
         "200":
-          description: "OK"
+          description: "Blocked user mxid added"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MxId"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: deleteBlockedUserMxid
+      parameters: []
+      responses:
+        "204":
+          description: "Blocked user mxid deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
   /devices/{deviceId}/blockedUser/{domain}:
     parameters:
@@ -1853,11 +2061,37 @@ paths:
         - TI-M_ePA
         - authorizationManagement
       description: ""
-      operationId: getblockedUser
+      operationId: getblockedUserDomain
       parameters: []
       responses:
         "200":
-          description: "OK"
+          description: "Blocked user domain added"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Domain"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+
+    delete:
+      tags:
+        - TI-M_Pro
+        - TI-M_ePA
+        - authorizationManagement
+      description: ""
+      operationId: deleteBlockedDomain
+      parameters: []
+      responses:
+        "204":
+          description: "Blocked user domain deleted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Unauthorized
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 
 # awag end
 
@@ -2662,21 +2896,19 @@ components:
       enum: [AllowAll, BlockAll]
 
     AuthorizationList:
-      description: "The list of entries in authorization list ."
+      description: "The list of entries in authorization list."
       type: object
       properties:
         mxids:
-          description: "The list of ...."
+          description: "The list of mxids"
           type: array
           items:
             $ref: "#/components/schemas/MxId"
-          readOnly: true
         domains:
-          description: "The list of ...."
+          description: "The list of domains"
           type: array
           items:
             $ref: "#/components/schemas/Domain"
-          readOnly: true
 
     Domain:
       description: "A Matrix-Domain"
