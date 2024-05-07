@@ -1771,7 +1771,7 @@ paths:
               $ref: "#/components/schemas/AuthorizationMode"
       responses:
         "200":
-          description: "client authorization mode was set"
+          description: "Client authorization mode was set"
           content:
             application/json:
               schema:
@@ -1797,7 +1797,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "list of allowed users or domains"
+          description: "List of allowed users or domains"
           content:
             application/json:
               schema:
@@ -1820,7 +1820,7 @@ paths:
               $ref: "#/components/schemas/AuthorizationList"
       responses:
         "200":
-          description: "Add allowed users or domains"
+          description: "Add allowed users or domains added"
           content:
             application/json:
               schema:
@@ -1841,7 +1841,7 @@ paths:
       operationId: deleteAlloweddUsersList
       responses:
         "204":
-          description: "AlloweddUsersList Deleted"
+          description: "Allowed users list deleted"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1855,7 +1855,6 @@ paths:
     parameters:
       - $ref: "#/components/parameters/deviceId"
       - $ref: "#/components/parameters/transactionIdHeader"
-      - $ref: "#/components/parameters/mxidInPath"
     get:
       tags:
         - TI-M_Pro
@@ -1866,7 +1865,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "list of blocked users or domains"
+          description: "List of blocked users or domains"
           content:
             application/json:
               schema:
@@ -1889,7 +1888,7 @@ paths:
               $ref: "#/components/schemas/AuthorizationList"
       responses:
         "200":
-          description: "list of blocked users or domains"
+          description: "List of blocked users or domains added"
           content:
             application/json:
               schema:
@@ -1910,7 +1909,7 @@ paths:
       operationId: deleteBlockedUsersList
       responses:
         "204":
-          description: "BlockedUsersList deleted"
+          description: "Blocked users list deleted"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1935,7 +1934,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "Allowed user mxid added"
+          description: "Get allowed user mxid"
           content:
             application/json:
               schema:
@@ -1978,7 +1977,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "Allowed user domain added"
+          description: "Get allowed user domain"
           content:
             application/json:
               schema:
@@ -2022,7 +2021,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "Blocked user mxid added"
+          description: "Get blocked user mxid"
           content:
             application/json:
               schema:
@@ -2065,7 +2064,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: "Blocked user domain added"
+          description: "Get blocked user domain"
           content:
             application/json:
               schema:
